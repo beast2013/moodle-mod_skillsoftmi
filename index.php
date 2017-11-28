@@ -1,0 +1,102 @@
+<?php
+/*
+ * @package		mod-skillsoftmi
+ * @author		$Author$
+ * @version		SVN: $Header$
+ * @copyright	2009-2014 Martin Holden
+ * @license		http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
+
+require_once('../../config.php');
+require_once($CFG->dirroot.'/mod/skillsoftmi/locallib.php');
+
+$id = required_param('id', PARAM_INT);   // course id
+$PAGE->set_url('/mod/skillsoftmi/index.php', array('id'=>$id));
+
+if (!empty($id)) {
+	if (! $course = $DB->get_record('course', array('id'=>$id))) {
+		print_error('Course ID is incorrect');
+	}
+} else {
+	print_error('A required parameter is missing');
+}
+
+require_course_login($course);
+
+$PAGE->set_pagelayout('incourse');
+
+$context = context_course::instance($course->id);
+skillsoft_event_log(SKILLSOFTmi_EVENT_ACTIVITY_MANAGEMENT_VIEWED, $skillsoft, $context, $cm);
+
+//Retrieve the localisation strings
+
+$strskillsoft = get_string('modulename', 'skillsoftmi');
+$strskillsofts = get_string('modulenameplural', 'skillsoftmi');
+$strweek = get_string('week');
+$strtopic = get_string('topic');
+$strskillsoftid = get_string('skillsoft_assetid', 'skillsoftmi');
+$strskillsoftsummary = get_string('skillsoft_summary', 'skillsoftmi');
+$strlastmodified = get_string('lastmodified');
+$strname = get_string('skillsoft_name','skillsoftmi');
+$strsectionname  = get_string('sectionname', 'format_'.$course->format);
+$strsummary = get_string("summary");
+
+$PAGE->set_title($strskillsofts);
+$PAGE->set_heading($course->fullname);
+$PAGE->navbar->add($strskillsofts);
+echo $OUTPUT->header();
+
+$usesections = course_format_uses_sections($course->format);
+if ($usesections) {
+	$sections = get_all_sections($course->id);
+}
+
+if ($usesections) {
+	$sortorder = "cw.section ASC";
+} else {
+	$sortorder = "m.timemodified DESC";
+}
+
+if (! $skillsofts = get_all_instances_in_course('skillsoftmi', $course)) {
+	notice(get_string('thereareno', 'moodle', $strskillsofts), '../../course/view.php?id=$course->id');
+	exit;
+}
+
+$table = new html_table();
+
+if ($usesections) {
+	$table->head  = array ($strsectionname, $strskillsoftid, $strname, $strsummary);
+	$table->align = array ("center", "left", "left", "left");
+} else {
+	$table->head  = array ($strlastmodified, $strskillsoftid, $strname, $strsummary);
+	$table->align = array ("left", "left", "left", "left");
+}
+
+foreach ($skillsofts as $skillsoft) {
+
+	$context = context_MODULE::instance($skillsoft->coursemodule);
+	
+	$tt = "";
+	if ($usesections) {
+		if ($skillsoft->section) {
+			$tt = get_section_name($course, $sections[$skillsoft->section]);
+		}
+	} else {
+		$tt = userdate($skillsoft->timemodified);
+	}
+	$options = (object)array('noclean'=>true);
+	if (!$skillsoft->visible) {
+		//Show dimmed if the mod is hidden
+		$table->data[] = array ($tt, $skillsoft->assetid, '<a class="dimmed" href="view.php?id='.$skillsoft->coursemodule.'">'.format_string($skillsoft->name).'</a>', $skillsoft->intro);
+	} else {
+		//Show normal if the mod is visible
+		$table->data[] = array ($tt, $skillsoft->assetid, '<a href="view.php?id='.$skillsoft->coursemodule.'">'.format_string($skillsoft->name).'</a>', $skillsoft->intro);
+	}
+}
+
+echo "<br />";
+
+echo html_writer::table($table);
+
+echo $OUTPUT->footer();
+
