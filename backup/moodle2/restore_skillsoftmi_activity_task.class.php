@@ -24,7 +24,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/mod/skillsoft/backup/moodle2/restore_skillsoftmi_stepslib.php'); // Because it exists (must)
+require_once($CFG->dirroot . '/mod/skillsoftmi/backup/moodle2/restore_skillsoftmi_stepslib.php'); // Because it exists (must)
 
 /**
  * survey restore task that provides all the settings and steps to perform one
