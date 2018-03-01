@@ -38,14 +38,23 @@ function skillsoftmi_iscompletable($skillsoft) {
  * of the new instance.
  *
  * @param object $skillsoft An object from the form in mod_form.php
+ * @param mod_page_mod_form $mform
  * @return int The id of the newly inserted skillsoft record
  */
-function skillsoftmi_add_instance($skillsoft) {
+function skillsoftmi_add_instance($skillsoft, $mform = null) {
 	global $CFG, $DB;
 
 	$skillsoft->timecreated = time();
 	$skillsoft->timemodified = time();
 	$skillsoft->completable = skillsoftmi_iscompletable($skillsoft);
+
+	if ($mform) {
+    	$skillsoft->audience = $skillsoft->audienceeditor['text'];
+		$skillsoft->audienceformat = $skillsoft->audienceeditor['format'];
+		
+		$skillsoft->prereq = $skillsoft->prereqeditor['text'];
+        $skillsoft->prereqformat = $skillsoft->prereqeditor['format'];
+	}
 
 	if ($result = $DB->insert_record('skillsoftmi', $skillsoft)) {
 		$skillsoft->id = $result;
@@ -88,6 +97,12 @@ function skillsoftmi_update_instance($skillsoft) {
 	global $DB;
 	$skillsoft->timemodified = time();
 	$skillsoft->id = $skillsoft->instance;
+
+	$skillsoft->audience = $skillsoft->audienceeditor['text'];
+    $skillsoft->audienceformat = $skillsoft->audienceeditor['format'];
+
+    $skillsoft->prereq = $skillsoft->prereqeditor['text'];
+    $skillsoft->prereqformat = $skillsoft->prereqeditor['format'];
 
 	$skillsoft->completable = skillsoftmi_iscompletable($skillsoft);
 

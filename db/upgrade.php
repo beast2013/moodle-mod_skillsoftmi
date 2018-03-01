@@ -33,7 +33,7 @@ function xmldb_skillsoftmi_upgrade($oldversion) {
         $dbman->rename_field($table, $summaryfield, 'intro');
 
 
-        //Add intr0format
+        //Add introformat
         $introformatfield = new xmldb_field('introformat', XMLDB_TYPE_INTEGER, '4', XMLDB_UNSIGNED, null, null, '1', 'intro');
 		if (!$dbman->field_exists($table,$introformatfield)) {
         	$dbman->add_field($table, $introformatfield);
@@ -179,16 +179,40 @@ function xmldb_skillsoftmi_upgrade($oldversion) {
     	upgrade_mod_savepoint(true, 2016082300, 'skillsoftmi');
     	$result = true;
     }     
-	
-	if ($result && $oldversion < 2016082301) {
-		upgrade_mod_savepoint(true, 2016082301, 'skillsoftmi');
-		$result = true;
-	}      
-		
-	if ($result && $oldversion < 2016082302) {
-		upgrade_mod_savepoint(true, 2016082302, 'skillsoftmi');
-		$result = true;
+
+    if ($result && $oldversion < 2016082301) {
+    	upgrade_mod_savepoint(true, 2016082301, 'skillsoftmi');
+    	$result = true;
 	} 
+	
+	if($result && $oldversion < 2017113000) {
+		$table = new xmldb_table('skillsoftmi');
+
+		//Add audienceformat
+        $audienceformatfield = new xmldb_field('audienceformat', XMLDB_TYPE_INTEGER, '4', XMLDB_UNSIGNED, null, null, '1', 'audience');
+        if (!$dbman->field_exists($table, $audienceformatfield)) {
+            $dbman->add_field($table, $audienceformatfield);
+		}
+
+		//Add prereqformat
+        $prereqformatfield = new xmldb_field('prereqformat', XMLDB_TYPE_INTEGER, '4', XMLDB_UNSIGNED, null, null, '1', 'prereq');
+        if (!$dbman->field_exists($table, $prereqformatfield)) {
+            $dbman->add_field($table, $prereqformatfield);
+        }		
+
+        upgrade_mod_savepoint(true, 2017113000, 'skillsoftmi');
+        $result = true;
+	}
+
+    if ($result && $oldversion < 2018022301) {
+        upgrade_mod_savepoint(true, 2018022301, 'skillsoftmi');
+        $result = true;
+    }
+
+    if ($result && $oldversion < 2018022601) {
+        upgrade_mod_savepoint(true, 2018022601, 'skillsoftmi');
+        $result = true;
+    }
     
 	return $result;
 }

@@ -677,7 +677,6 @@ function skillsoftmi_getusername_from_loginname($skillport_loginname) {
 	if ($CFG->skillsoftmi_useridentifier == IDENTIFIER_USERIDmi) {
 		if (!is_numeric($skillport_loginname) ) {
 			return 0;
-			break;
 		}
 	}
 
@@ -1391,3 +1390,9 @@ function skillsoftmi_event_log($event_type, $skillsoft, $context, $cm) {
         skillsoftmi_event_log_standard($event_type, $skillsoft, $context, $cm);
     }
 }
+
+function skillsoftmi_get_editor_options($context) {
+    global $CFG;
+    return ['subdirs' => 1, 'maxbytes' => $CFG->maxbytes, 'maxfiles' => -1, 'changeformat' => 1, 'context' => $context, 'noclean' => 1, 'trusttext' => 0];
+}
+

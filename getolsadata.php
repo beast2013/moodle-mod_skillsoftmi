@@ -38,8 +38,8 @@ if (strtolower($id) != 'sso') {
 				print "window.opener.document.getElementById('id_launch').value=".'"'.$response->result->launchurl->_.'";';
 				print "window.opener.document.getElementById('id_duration').value=".'"'.$response->result->duration.'";';
 				print "window.opener.setTextArea(window.opener,'introeditor',".'"'.olsadatatohtmlmi($response->result->description->_).'");';
-				print "window.opener.setTextArea(window.opener,'audience',".'"'.olsadatatohtmlmi($response->result->audience).'");';
-				print "window.opener.setTextArea(window.opener,'prereq',".'"'.olsadatatohtmlmi($response->result->prerequisites).'");';
+				print "window.opener.setTextArea(window.opener,'audienceeditor',".'"'.olsadatatohtmlmi($response->result->audience).'");';
+				print "window.opener.setTextArea(window.opener,'prereqeditor',".'"'.olsadatatohtmlmi($response->result->prerequisites).'");';
 				print "window.close();";
 			} else {
 				print "document.getElementById('waitingmessage').style.display = 'none';";
@@ -51,8 +51,8 @@ if (strtolower($id) != 'sso') {
 				print "window.opener.document.getElementById('id_launch').value=".'"'.$CFG->skillsoftmi_ssourl.'";';
 				print "window.opener.document.getElementById('id_duration').value='0';";
 				print "window.opener.setTextArea(window.opener,'introeditor',".'"'.get_string('skillsoft_ssoassetsummary', 'skillsoftmi').'");';
-				print "window.opener.setTextArea(window.opener,'audience','');";
-				print "window.opener.setTextArea(window.opener,'prereq','');";
+				print "window.opener.setTextArea(window.opener,'audienceeditor','');";
+				print "window.opener.setTextArea(window.opener,'prereqeditor','');";
 				print "window.close();";
 			} else {
 				print "document.getElementById('waitingmessage').style.display = 'none';";

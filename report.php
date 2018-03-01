@@ -110,7 +110,8 @@ if ($user) {
 			$row = array();
 			$score = '&nbsp;';
 			if ($trackdata = skillsoftmi_get_tracks($skillsoft->id,$USER->id,$a)) {
-				$row[] = '<a href="'.new moodle_url('/mod/skillsoftmi/report.php', array('id'=>$cm->id,'user'=>'true','attempt'=>$trackdata->attempt)).'">'.$trackdata->attempt.'</a>';
+				//$row[] = '<a href="'.new moodle_url('/mod/skillsoftmi/report.php', array('id'=>$cm->id,'user'=>'true','attempt'=>$trackdata->attempt)).'">'.$trackdata->attempt.'</a>';
+				$row[] = $trackdata->attempt;
 				$row[] = isset($trackdata->{'[SUMMARY]firstaccess'}) ? userdate($trackdata->{'[SUMMARY]firstaccess'}):'';
 				$row[] = isset($trackdata->{'[SUMMARY]lastaccess'}) ? userdate($trackdata->{'[SUMMARY]lastaccess'}):'';
 				if ($skillsoft->completable == true) {
@@ -137,7 +138,8 @@ if ($user) {
 		skillsoftmi_event_log(SKILLSOFTmi_EVENT_REPORT_VIEWED, $skillsoft, $contextmodule, $cm);
 		$score = '&nbsp;';
 		if ($trackdata = skillsoftmi_get_tracks($skillsoft->id,$USER->id,$attempt)) {
-			$row[] = '<a href="'.new moodle_url('/mod/skillsoftmi/report.php', array('id'=>$cm->id,'user'=>'true','attempt'=>$trackdata->attempt)).'">'.$trackdata->attempt.'</a>';
+			//$row[] = '<a href="'.new moodle_url('/mod/skillsoftmi/report.php', array('id'=>$cm->id,'user'=>'true','attempt'=>$trackdata->attempt)).'">'.$trackdata->attempt.'</a>';
+			$row[] = $trackdata->attempt;
 			$row[] = isset($trackdata->{'[SUMMARY]firstaccess'}) ? userdate($trackdata->{'[SUMMARY]firstaccess'}):'';
 			$row[] = isset($trackdata->{'[SUMMARY]lastaccess'}) ? userdate($trackdata->{'[SUMMARY]lastaccess'}):'';
 			if ($skillsoft->completable == true) {
@@ -207,7 +209,10 @@ if ($user) {
 
 			for ($a = $maxattempts; $a > 0; $a--) {
 				$row = array();
-				$userdata = $DB->get_record('user',array('id'=>$skillsoftuser->userid),'id, firstname, lastname, picture, imagealt, email');
+
+				$ufields = user_picture::fields('');
+
+				$userdata = $DB->get_record('user', ['id' => $skillsoftuser->userid], $ufields);
 
 				$row[] = $OUTPUT->user_picture($userdata, array('courseid'=>$course->id)).' '.'<a href="'.$CFG->wwwroot.'/user/view.php?id='.$skillsoftuser->userid.'&amp;course='.$course->id.'">'.fullname($userdata).'</a>';
 
