@@ -213,6 +213,11 @@ function xmldb_skillsoftmi_upgrade($oldversion) {
         upgrade_mod_savepoint(true, 2018022601, 'skillsoftmi');
         $result = true;
     }
+
+    if ($result && $oldversion < 2019122801) {
+        upgrade_mod_savepoint(true, 2019122801, 'skillsoftmi');
+        $result = true;
+    }
     
 	return $result;
 }
