@@ -325,3 +325,43 @@ $string['skillsoft_allattempt'] = 'All Attempts';
 $string['skillsoft_info'] = 'Info';
 $string['skillsoft_results'] = 'Results';
 $string['skillsoft_allresults'] = 'All Users Results';
+
+//provider.php
+$string['privacy:metadata:aicc:data'] = 'Personal data passed through from the AICC subsystem to SkillSoft.';
+$string['privacy:metadata:aicc:externalpurpose'] = 'This plugin sends data externally using the AICC HACP to SkillSoft.';
+$string['privacy:metadata:session_track:sessionid'] = 'A unique string used to connect the sessions between Moodle and SkillSoft';
+$string['privacy:metadata:session_track:timecreated'] = 'The time when the sessionid was created';
+$string['privacy:metadata:attempt'] = 'The attempt number';
+$string['privacy:metadata:au_track:element'] = 'The name of the element to be tracked';
+$string['privacy:metadata:au_track:value'] = 'The value of the given element';
+$string['privacy:metadata:skillsoftmi_session_track'] = 'The session information used to connect Moodle and SkillSoft sessions';
+$string['privacy:metadata:skillsoftmi_au_track'] = 'The tracked data of the SkillSoft courses belonging to the activity';
+$string['privacy:metadata:timemodified'] = 'The time when the tracked element was last modified';
+$string['privacy:metadata:userid'] = 'The ID of the user who accessed the SkillSoft activity';
+
+$string['privacy:metadata:report_results:loginname'] = 'Login Name as sent to SkillSoft';
+$string['privacy:metadata:report_results:lastname'] = 'Last name of the user as sent to SkillSoft';
+$string['privacy:metadata:report_results:firstname'] = 'First name of the user as sent to SkillSoft';
+$string['privacy:metadata:report_results:firstaccessdate'] = 'First date and time that the user accessed the SkillSoft Title';
+$string['privacy:metadata:report_results:lastaccessdate'] = 'Last date and time that the user accessed the SkillSoft Title';
+$string['privacy:metadata:report_results:completeddate'] = 'Date and time that the user completed the SkillSoft Title';
+$string['privacy:metadata:report_results:firstscore'] = 'First grade the user achieved for the SkillSoft Title';
+$string['privacy:metadata:report_results:currentscore'] = 'Last grade the user achieved for the SkillSoft Title';
+$string['privacy:metadata:report_results:bestscore'] = 'Best grade the user achieved for the SkillSoft Title';
+$string['privacy:metadata:report_results:lessionstatus'] = 'Status of the lession. i.e. passed, failed, complete';
+$string['privacy:metadata:report_results:duration'] = 'Amount of time in minutes that the user have spent in the SkillSoft Title';
+$string['privacy:metadata:report_results:accesscount'] = 'Number of times the user accessed the SkillSoft Title';
+$string['privacy:metadata:report_results:processed'] = 'Weather or not this record has been processed';
+$string['privacy:metadata:skillsoftmi_report_results'] = 'Stored the data from the downloaded Custom Report so it can be processed by the plugin';
+$string['privacy:metadata:tdr:timestamp'] = 'Timestamp of when the record was entered into SkillSoft`s system';
+$string['privacy:metadata:tdr:username'] = 'Username that is in SkillSoft`s System';
+$string['privacy:metadata:tdr:reset'] = 'If this record was sent to the content sonsumer but not acknowledged';
+$string['privacy:metadata:tdr:format'] = 'Name of the format used in the data element';
+$string['privacy:metadata:tdr:data'] = 'The actual data from SkillSoft for the user';
+$string['privacy:metadata:tdr:context'] = 'Weather the SkillSoft Title is completable or not and is the Asset delivered through the Asset Synchonization Cycle or not';
+$string['privacy:metadata:tdr:processed'] = 'Has this record been processed by the Moodle plugin';
+$string['privacy:metadata:skillsoftmi_tdr'] = 'Stores the data from the On Demand Connumications so it can be processed by the plugin';
+
+$string['skillsoft_mysessions'] = 'My Sessions';
+$string['skillsoft_mytdr'] = 'My TDRs';
+$string['skillsoft_myreportresults'] = 'My Report Results';
