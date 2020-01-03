@@ -9,7 +9,7 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version  = 2019122801;  // If version == 0 then module will not be installed
+$plugin->version  = 2019122802;  // If version == 0 then module will not be installed
 $plugin->requires = 2018050800;  // Requires this Moodle version (2.8)
 $plugin->cron     = 60;           // Period for cron to check this module (secs)
 $plugin->component = 'mod_skillsoftmi'; // Full name of the plugin (used for diagnostics)
