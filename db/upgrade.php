@@ -185,8 +185,8 @@ function xmldb_skillsoftmi_upgrade($oldversion) {
 		$result = true;
 	}      
 		
-	if ($result && $oldversion < 2016082302) {
-		upgrade_mod_savepoint(true, 2016082302, 'skillsoftmi');
+	if ($result && $oldversion < 2016082306) {
+		upgrade_mod_savepoint(true, 2016082306, 'skillsoftmi');
 		$result = true;
 	} 
     
